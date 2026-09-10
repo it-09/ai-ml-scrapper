@@ -1,0 +1,148 @@
+{
+  "title": "AI Jobs Intelligence Platform",
+  "description": "Track every AI and ML job opening across 200+ companies. Get structured data with skills, frameworks, experience levels, and optional AI enrichment.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "sources": {
+      "title": "Job sources",
+      "type": "array",
+      "description": "Which job boards to scrape. All seven are enabled by default.",
+      "editor": "stringList",
+      "sectionCaption": "Data Sources",
+      "default": ["greenhouse", "lever", "remoteok", "weworkremotely", "yc", "otta", "ashby"],
+      "prefill": ["greenhouse", "lever", "remoteok", "weworkremotely", "yc", "otta", "ashby"]
+    },
+    "keywords": {
+      "title": "Keyword filter",
+      "type": "array",
+      "description": "Only include jobs containing at least one of these keywords. Leave empty to include all AI-relevant jobs.",
+      "editor": "stringList",
+      "sectionCaption": "Filters",
+      "default": [],
+      "prefill": ["Python", "PyTorch", "LLM", "machine learning"]
+    },
+    "companies": {
+      "title": "Company filter",
+      "type": "array",
+      "description": "Only include jobs from these companies (partial match). Leave empty to include all companies.",
+      "editor": "stringList",
+      "default": [],
+      "prefill": ["OpenAI", "Anthropic", "Google", "Meta"]
+    },
+    "experienceLevels": {
+      "title": "Experience level filter",
+      "type": "array",
+      "description": "Only include jobs matching these experience levels. Leave empty to include all levels.",
+      "editor": "stringList",
+      "default": [],
+      "prefill": ["intern", "entry", "mid", "senior", "staff", "lead", "executive"]
+    },
+    "parseAllResults": {
+      "title": "Parse all results",
+      "type": "boolean",
+      "description": "Ignore the max output limit and scrape all available jobs from the selected sources.",
+      "default": false
+    },
+    "maxItems": {
+      "title": "Max output items",
+      "type": "integer",
+      "description": "Maximum number of job records to output per run. Ignored if 'Parse all results' is enabled.",
+      "default": 1000,
+      "minimum": 1,
+      "maximum": 50000
+    },
+    "classifyWithAI": {
+      "title": "Enable AI enrichment",
+      "type": "boolean",
+      "description": "Use an LLM to enrich jobs with structured metadata (skills, frameworks, experience level). Requires GROQ_API_KEY or OPENROUTER_API_KEY.",
+      "default": false,
+      "sectionCaption": "AI Enrichment"
+    },
+    "classificationMode": {
+      "title": "Classification mode",
+      "type": "string",
+      "description": "How to classify jobs. Deterministic is free and fast. Hybrid uses LLM only for uncertain jobs. AI classifies every job with LLM.",
+      "editor": "select",
+      "enum": ["deterministic", "hybrid", "ai"],
+      "enumTitles": [
+        "Deterministic (keyword-only, free)",
+        "Hybrid (LLM for uncertain jobs, recommended)",
+        "AI (LLM for every job, most thorough)"
+      ],
+      "default": "hybrid"
+    },
+    "llmProvider": {
+      "title": "LLM provider",
+      "type": "string",
+      "description": "Which LLM to use for AI enrichment. Set the corresponding API key in environment variables.",
+      "editor": "select",
+      "enum": ["groq", "openrouter"],
+      "enumTitles": ["Groq (fast, free tier available)", "OpenRouter (flexible model selection)"],
+      "default": "groq"
+    },
+    "tier": {
+      "title": "Access tier",
+      "type": "string",
+      "description": "Controls output limits and features. Free tier includes 100 jobs from 2 sources.",
+      "editor": "select",
+      "enum": ["free", "starter", "pro", "enterprise"],
+      "enumTitles": [
+        "Free (100 jobs, 2 sources, no AI)",
+        "Starter (1,000 jobs, all sources)",
+        "Pro (5,000 jobs, AI enrichment)",
+        "Enterprise (50,000 jobs, priority + alerts)"
+      ],
+      "default": "starter"
+    },
+    "detectChanges": {
+      "title": "Detect changes (incremental mode)",
+      "type": "boolean",
+      "description": "Compare this run against the previous run to detect new, updated, and removed jobs.",
+      "default": true,
+      "sectionCaption": "Advanced"
+    },
+    "proxy": {
+      "title": "Use Apify Proxy",
+      "type": "boolean",
+      "description": "Route requests through Apify Proxy to avoid rate limits. Recommended for large runs.",
+      "default": false
+    },
+    "customGreenhouseTokens": {
+      "title": "Custom Greenhouse tokens",
+      "type": "array",
+      "description": "Add custom Greenhouse company board tokens. Find tokens at boards.greenhouse.io/{token}.",
+      "editor": "stringList",
+      "default": []
+    },
+    "customLeverSlugs": {
+      "title": "Custom Lever slugs",
+      "type": "array",
+      "description": "Add custom Lever company slugs. Find slugs at lever.co/{slug}.",
+      "editor": "stringList",
+      "default": []
+    },
+    "alertKeywords": {
+      "title": "Alert keywords",
+      "type": "array",
+      "description": "Send webhook when a new job matches these keywords. Requires webhook URL.",
+      "editor": "stringList",
+      "default": [],
+      "sectionCaption": "Webhook Alerts"
+    },
+    "alertMinSalary": {
+      "title": "Alert minimum salary",
+      "type": "integer",
+      "description": "Send webhook when a new job has salary above this threshold. Set to 0 to disable.",
+      "default": 0,
+      "minimum": 0
+    },
+    "webhookUrl": {
+      "title": "Webhook URL",
+      "type": "string",
+      "description": "Slack, Discord, or custom webhook URL for job alerts. Leave empty to disable.",
+      "editor": "textfield",
+      "default": ""
+    }
+  }
+}

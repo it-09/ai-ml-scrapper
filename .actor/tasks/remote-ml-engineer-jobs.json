@@ -1,0 +1,15 @@
+{
+  "actorId": "lissome_dancer/ai-ml-jobs-scraper",
+  "name": "Remote ML Engineer Jobs",
+  "description": "Find remote machine learning engineer positions across all sources. Filters for remote roles only.",
+  "input": {
+    "sources": ["greenhouse", "lever", "remoteok", "weworkremotely", "yc", "otta", "ashby"],
+    "keywords": ["machine learning engineer", "ML engineer", "deep learning"],
+    "companies": [],
+    "classifyWithAI": false,
+    "classificationMode": "deterministic",
+    "tier": "starter",
+    "maxItems": 1000,
+    "detectChanges": true
+  }
+}

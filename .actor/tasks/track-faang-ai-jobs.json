@@ -1,0 +1,15 @@
+{
+  "actorId": "lissome_dancer/ai-ml-jobs-scraper",
+  "name": "Track FAANG AI Jobs",
+  "description": "Track AI and ML job openings at OpenAI, Anthropic, Google, Meta, and Apple. Great for monitoring top AI company hiring.",
+  "input": {
+    "sources": ["greenhouse", "lever", "yc", "otta", "ashby"],
+    "keywords": ["AI", "machine learning", "deep learning", "LLM"],
+    "companies": ["OpenAI", "Anthropic", "Google", "Meta", "Apple"],
+    "classifyWithAI": false,
+    "classificationMode": "deterministic",
+    "tier": "starter",
+    "maxItems": 500,
+    "detectChanges": true
+  }
+}

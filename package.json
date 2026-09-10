@@ -1,0 +1,31 @@
+{
+  "name": "@workspace/ai-jobs-actor",
+  "version": "2.5.1",
+  "private": false,
+  "type": "module",
+  "description": "Track every AI and ML job opening across 200+ companies. 7 sources, AI enrichment, webhook alerts, analytics.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js",
+    "dev": "tsx src/main.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "apify": "^3.2.2",
+    "undici": "^7.4.0",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "25.9.4",
+    "tsx": "4.22.4",
+    "typescript": "~5.9.3",
+    "vitest": "^3.2.4"
+  }
+}

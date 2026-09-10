@@ -1,0 +1,11 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "AI/ML Jobs Scraper output",
+  "properties": {
+    "jobs": {
+      "type": "string",
+      "title": "Job listings",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    }
+  }
+}

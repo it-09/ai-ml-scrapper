@@ -1,0 +1,24 @@
+{
+  "actorSpecification": 1,
+  "name": "ai-ml-jobs-scraper",
+  "title": "AI/ML Jobs Scraper — 200+ Companies, 7 Sources, AI Enrichment",
+  "seoTitle": "AI/ML Jobs Scraper | Track 200+ Companies with AI Enrichment",
+  "seoDescription": "Scrape AI and ML job listings from 200+ companies across 7 sources. Extracts skills, frameworks, salary, experience level. Optional AI enrichment. Change detection and webhook alerts.",
+  "description": "Track every AI and ML job opening across 200+ companies. Scrapes Greenhouse, Lever, RemoteOK, WeWorkRemotely, YC Work at a Startup, Otta, and Ashby in parallel. Classifies skills, frameworks, LLM technologies, experience level, and more. Optional LLM enrichment via Groq or OpenRouter. Incremental runs with change detection. Webhook alerts for new matching jobs.",
+  "categories": ["JOBS", "AI", "DEVELOPER_TOOLS"],
+  "version": "2.5.1",
+  "storages": {
+    "dataset": "./dataset_schema.json"
+  },
+  "output": "./output_schema.json",
+  "buildTag": "latest",
+  "minMemoryMbytes": 256,
+  "maxMemoryMbytes": 2048,
+  "environmentVariables": {
+    "GROQ_API_KEY": "API key for Groq LLM enrichment (optional)",
+    "OPENROUTER_API_KEY": "API key for OpenRouter LLM enrichment (optional)"
+  },
+  "dockerfile": "./Dockerfile",
+  "readme": "./README.md",
+  "input": "../INPUT_SCHEMA.json"
+}

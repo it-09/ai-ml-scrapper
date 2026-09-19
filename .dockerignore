@@ -1,0 +1,14 @@
+node_modules
+dist
+storage
+.git
+.gitignore
+.env
+*.test.ts
+*.test.js
+vitest.config.ts
+INPUT_SCHEMA.json
+CHANGELOG.md
+README.md
+.actor
+.npmrc

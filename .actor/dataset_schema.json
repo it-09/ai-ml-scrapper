@@ -1,0 +1,97 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+      "hash": { "type": "string", "title": "Hash", "description": "Unique job identifier" },
+      "externalId": { "type": "string", "title": "External ID", "description": "Source-specific job ID" },
+      "source": { "type": "string", "title": "Source", "description": "Job board source" },
+      "company": { "type": "string", "title": "Company", "description": "Company name" },
+      "companyWebsite": { "type": ["string", "null"], "title": "Company Website", "description": "Company website URL" },
+      "companyIndustry": { "type": "string", "title": "Company Industry", "description": "Industry classification" },
+      "title": { "type": "string", "title": "Job Title", "description": "Position title" },
+      "department": { "type": ["string", "null"], "title": "Department", "description": "Job department" },
+      "employmentType": { "type": ["string", "null"], "title": "Employment Type", "description": "Full-time, part-time, etc." },
+      "location": { "type": ["string", "null"], "title": "Location", "description": "Job location" },
+      "remote": { "type": "boolean", "title": "Remote", "description": "Whether the job is remote" },
+      "salaryMin": { "type": ["number", "null"], "title": "Min Salary", "description": "Minimum salary in USD" },
+      "salaryMax": { "type": ["number", "null"], "title": "Max Salary", "description": "Maximum salary in USD" },
+      "salaryCurrency": { "type": ["string", "null"], "title": "Salary Currency", "description": "Currency code" },
+      "equity": { "type": ["string", "null"], "title": "Equity", "description": "Equity/stock options" },
+      "skills": { "type": "array", "items": { "type": "string" }, "title": "Skills", "description": "Required skills" },
+      "aiFrameworks": { "type": "array", "items": { "type": "string" }, "title": "AI Frameworks", "description": "AI/ML frameworks" },
+      "llmTech": { "type": "array", "items": { "type": "string" }, "title": "LLM Technologies", "description": "LLM-related technologies" },
+      "vectorDbs": { "type": "array", "items": { "type": "string" }, "title": "Vector Databases", "description": "Vector database technologies" },
+      "agentTooling": { "type": "array", "items": { "type": "string" }, "title": "Agent Tooling", "description": "AI agent frameworks and tools" },
+      "cloudProviders": { "type": "array", "items": { "type": "string" }, "title": "Cloud Providers", "description": "Cloud platform technologies" },
+      "educationRequirement": { "type": ["string", "null"], "title": "Education", "description": "Education requirement" },
+      "visaSponsorship": { "type": ["boolean", "null"], "title": "Visa Sponsorship", "description": "Whether visa sponsorship is offered" },
+      "experienceLevel": { "type": ["string", "null"], "title": "Experience Level", "description": "Detected experience level" },
+      "description": { "type": "string", "title": "Description", "description": "Job description text" },
+      "applyUrl": { "type": "string", "title": "Apply URL", "description": "Direct link to apply" },
+      "postedDate": { "type": ["string", "null"], "title": "Posted Date", "description": "When the job was posted" },
+      "aiRelevanceScore": { "type": "number", "title": "AI Relevance", "description": "0-100 AI relevance score" },
+      "remoteScore": { "type": "number", "title": "Remote Score", "description": "0-100 remote work score" },
+      "salaryScore": { "type": "number", "title": "Salary Score", "description": "0-100 salary competitiveness score" },
+      "skillDensityScore": { "type": "number", "title": "Skill Density", "description": "0-100 skill density score" },
+      "companyQualityScore": { "type": "number", "title": "Company Quality", "description": "0-100 company quality score" },
+      "aiEnrichment": { "type": ["object", "null"], "title": "AI Enrichment", "description": "LLM-enriched metadata" },
+      "classificationSource": { "type": "string", "title": "Classification Source", "description": "How the job was classified" },
+      "changeType": { "type": "string", "title": "Change Type", "description": "created, updated, or unchanged" },
+      "firstSeen": { "type": "string", "title": "First Seen", "description": "When this job was first detected" },
+      "lastSeen": { "type": "string", "title": "Last Seen", "description": "When this job was last seen" },
+      "runId": { "type": "string", "title": "Run ID", "description": "Unique run identifier" },
+      "scrapedAt": { "type": "string", "title": "Scraped At", "description": "When this job was scraped" }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "All Jobs",
+      "transformation": {
+        "fields": [
+          "company", "title", "location", "remote", "source",
+          "salaryMin", "salaryMax", "skills", "aiFrameworks",
+          "experienceLevel", "aiRelevanceScore", "changeType",
+          "postedDate", "applyUrl"
+        ],
+        "desc": true
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "remote": { "label": "Remote", "format": "boolean" },
+          "applyUrl": { "label": "Apply", "format": "link" },
+          "salaryMin": { "label": "Min $", "format": "number" },
+          "salaryMax": { "label": "Max $", "format": "number" },
+          "aiRelevanceScore": { "label": "AI Score", "format": "number" },
+          "postedDate": { "label": "Posted", "format": "date" },
+          "skills": { "label": "Skills", "format": "array" },
+          "aiFrameworks": { "label": "Frameworks", "format": "array" }
+        }
+      }
+    },
+    "high-value": {
+      "title": "High-Value Jobs",
+      "description": "Jobs with salary > $100k or AI score > 70",
+      "transformation": {
+        "fields": [
+          "company", "title", "location", "salaryMin", "salaryMax",
+          "skills", "aiRelevanceScore", "applyUrl"
+        ],
+        "desc": true
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "applyUrl": { "label": "Apply", "format": "link" },
+          "salaryMin": { "label": "Min $", "format": "number" },
+          "salaryMax": { "label": "Max $", "format": "number" },
+          "aiRelevanceScore": { "label": "AI Score", "format": "number" },
+          "skills": { "label": "Skills", "format": "array" }
+        }
+      }
+    }
+  }
+}
